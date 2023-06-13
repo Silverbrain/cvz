@@ -1,9 +1,0 @@
-[0] Config.pm:307> INFO - This is Biber 2.17
-[0] Config.pm:310> INFO - Logfile is 'sections/cover.blg'
-[108] biber-darwin:340> INFO - === Mon Jun 12, 2023, 16:27:10
-[131] Biber.pm:418> INFO - Reading 'sections/cover.bcf'
-[273] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[293] bbl.pm:654> INFO - Writing 'sections/cover.bbl' with encoding 'UTF-8'
-[293] bbl.pm:757> INFO - Output to sections/cover.bbl
-[294] Biber.pm:130> WARN - The file 'sections/cover.bcf' does not contain any citations!
-[294] Biber.pm:132> INFO - WARNINGS: 1
