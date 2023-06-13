@@ -1,0 +1,56 @@
+\documentclass[../main.tex]{subfiles}
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+
+
+%-------------------------------------------------------------------------------
+%                Commands for elements of Cover Letter
+%-------------------------------------------------------------------------------
+% Define an environment for cvletter
+%\newenvironment{cvletter}{%
+
+% Define a section for the cover letter
+% Usage: \lettersection{<section-title>}
+
+
+% Define a title of the cover letter
+% Usage: \makelettertitle
+
+
+% Define a closing of the cover letter
+% Usage: \makeletterclosing
+
+
+% Defines recipient's information (cover letter only)
+% Usage: \recipient{<recipient name>}{<recipient address>}
+% Usage: \recipientname{<recipient name>}
+% Usage: \recipientaddress{<recipient address>}
+% Defines the title for letter (cover letter only, optional)
+% Usage: \lettertitle{<title>}
+% Usage: \letterdate{<date>}
+% Usage: \letteropening{<message>}
+% Defines a message of closing for letter (cover letter only)
+% Usage: \letterclosing{<message>}
+% Defines an enclosure for letter (cover letter only, optional)
+% Usage: \letterenclosure[<enclosure name>]{<enclosure>}
+\begin{cvletter}
+\recipientname{Recipient name}
+\recipientaddress{Recipient address}
+%\lettertitle{}
+\letterdate{\today}
+\letteropening{This is the opening,}
+
+
+\letterclosing{Sincerely yours,}
+%\letterenclosure[Sina]{I have no idea what's going on here}
+
+\makelettertitle
+
+This the body of the letter \_I think so\_.
+
+\makeletterclosing
+\end{cvletter}
+
+\end{document}
