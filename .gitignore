@@ -1,4 +1,4 @@
 *
-!.gitignore
-!*/*.tex
-!*/*.tex
+!*/
+!*.tex
+!*.cls
