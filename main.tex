@@ -26,6 +26,10 @@
 % If you would like to change the social information separator from a pipe (|) to something else
 \renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
 
+\ifcsname ifrenderphoto\endcsname\else
+  \expandafter\let\csname ifrenderphoto\expandafter\endcsname
+                  \csname ifrenderphoto\endcsname
+\fi
 
 %-------------------------------------------------------------------------------
 %	PERSONAL INFORMATION

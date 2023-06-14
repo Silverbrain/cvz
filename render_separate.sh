@@ -4,11 +4,21 @@ TEX_FILE_DIR="sections"
 OUTPUT_DIR="aux"
 
 OPEN_FILES=false
+RENDER_PHOTO="\let\ifrenderphoto\iffalse"
+
+VERBOSE=false
 
 while [[ $# -gt 0 ]]; do
     case $1 in
         -O|--open-pdf)
             OPEN_FILES=true
+            shift
+        ;;
+        -R|--render-photo)
+            if [ VERBOSE ]; then
+                echo "Creating the resume with photo."
+            fi
+            RENDER_PHOTO="\let\ifrenderphoto\iftrue"
             shift
         ;;
         *)
@@ -28,7 +38,7 @@ fi
 
 for TEX_FILE in "$TEX_FILE_DIR"/*.tex; do
     if [ -f "$TEX_FILE" ]; then
-        lualatex --output-directory="$OUTPUT_DIR" "$TEX_FILE"
+        lualatex --output-directory="$OUTPUT_DIR" "$RENDER_PHOTO\input{$TEX_FILE}"
         mv "$OUTPUT_DIR"/*.pdf .
     else
         echo "No tex file was found in $TEX_FILE_DIR directory."
