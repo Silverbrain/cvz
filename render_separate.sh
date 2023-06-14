@@ -8,31 +8,41 @@ RENDER_PHOTO="\let\ifrenderphoto\iffalse"
 
 VERBOSE=false
 
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        -O|--open-pdf)
-            OPEN_FILES=true
-            shift
+while getopts ":vOR" opt; do
+    case $opt in
+        v)
+            VERBOSE=true
         ;;
-        -R|--render-photo)
+        O)
+            OPEN_FILES=true
+            # shift
+        ;;
+        R)
             if [ VERBOSE ]; then
                 echo "Creating the resume with photo."
             fi
             RENDER_PHOTO="\let\ifrenderphoto\iftrue"
-            shift
+            # shift
         ;;
-        *)
-            echo "Invalide option.\n"
-            echo "Usage: $0 [-O|--open-pdf]"
+        \?)
+            echo "Invalide option -$OPTARG.\n"
+            echo "Usage: $0 [-v] [-O] [-R]\n"
+            echo "\t-v\n\t\tUsed to get more verbose status."
+            echo "\t-O\n\t\tUsed to open pdf files after the latex compilation is done."
+            echo "\t-R\n\t\tUsed to instruct the latex to render the photo at the begining of the resume."
             exit 1
         ;;
     esac
 done
 
 if [ -d "$OUTPUT_DIR" ]; then
-    echo "The directory exists."
+    if [ VERBOSE ]; then
+        echo "output directory exists."
+    fi
 else
-    echo "The directory does not exist.\nCreating the $OUTPUT_DIR directory."
+    if [ VERBOSE ]; then
+        echo "output directory does not exist.\nCreating the $OUTPUT_DIR directory."
+    fi
     mkdir "$OUTPUT_DIR"
 fi
 
