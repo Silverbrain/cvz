@@ -14,4 +14,4 @@ If you need to chaeck the log files, you can navegate to the `aux` directory and
 
 ## Requirements
 - zsh
-- laulatex
+- texlive
