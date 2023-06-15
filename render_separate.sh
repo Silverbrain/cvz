@@ -1,30 +1,37 @@
 #!/bin/zsh
 
+# Directory of .tex files mentioned in the main.tex
 TEX_FILE_DIR="sections"
+
+# Auxiliary directory name
 OUTPUT_DIR="aux"
 
-OPEN_FILES=false
-RENDER_PHOTO="\let\ifrenderphoto\iffalse"
+########## FLAGS ##########
+OPEN_FILES=false # Open pdf files after compilation
+RENDER_PHOTO="\let\ifrenderphoto\iffalse" # Render photo at top left corner
+VERBOSE=false #
 
-VERBOSE=false
+PRINT_LOG="> /dev/null" # Dump lualatex standard input if verbose is false
 
+# Reading input options
 while getopts ":vOR" opt; do
     case $opt in
-        v)
+        v) # Verboes
             VERBOSE=true
+            PRINT_LOG=""
         ;;
-        O)
+        O) # Open files
             OPEN_FILES=true
             # shift
         ;;
-        R)
-            if [ VERBOSE ]; then
+        R) # Render photo
+            if $VERBOSE; then
                 echo "Creating the resume with photo."
             fi
             RENDER_PHOTO="\let\ifrenderphoto\iftrue"
             # shift
         ;;
-        \?)
+        \?) # Bad argument
             echo "Invalide option -$OPTARG.\n"
             echo "Usage: $0 [-v] [-O] [-R]\n"
             echo "\t-v\n\t\tUsed to get more verbose status."
@@ -35,27 +42,45 @@ while getopts ":vOR" opt; do
     esac
 done
 
+# Checking if output directory exists
 if [ -d "$OUTPUT_DIR" ]; then
-    if [ VERBOSE ]; then
+    if $VERBOSE; then
         echo "output directory exists."
     fi
 else
-    if [ VERBOSE ]; then
+    if $VERBOSE; then
         echo "output directory does not exist.\nCreating the $OUTPUT_DIR directory."
     fi
-    mkdir "$OUTPUT_DIR"
+    mkdir "$OUTPUT_DIR" # Creating output dir for aux files
 fi
 
+# Looping through tex files mentioned in main.tex
 for TEX_FILE in "$TEX_FILE_DIR"/*.tex; do
-    if [ -f "$TEX_FILE" ]; then
-        lualatex --output-directory="$OUTPUT_DIR" "$RENDER_PHOTO\input{$TEX_FILE}"
+    if [ -f "$TEX_FILE" ]; then # Check if the texfile exists
+
+        # assembling lualatex command
+        command="lualatex --output-directory=$OUTPUT_DIR \"$RENDER_PHOTO\input{$TEX_FILE}\" $PRINT_LOG"
+        eval "$command"
+        
+        # if $VERBOSE; then
+        #     lualatex --output-directory="$OUTPUT_DIR" "$RENDER_PHOTO\input{$TEX_FILE}"
+        # else
+        #     lualatex --output-directory="$OUTPUT_DIR" "$RENDER_PHOTO\input{$TEX_FILE}" > /dev/null
+        # fi
+
+        ##########
+        # Moving pdf files from output directory to the root
+        # directory for easier access
+        ##########
         mv "$OUTPUT_DIR"/*.pdf .
     else
         echo "No tex file was found in $TEX_FILE_DIR directory."
         return 0
     fi
 done
-
+##########
+# Opening all pdf files in the root directory if -O flag is set
+##########
 if $OPEN_FILES; then
     for PDF_FILE in *.pdf; do
         open $PDF_FILE
