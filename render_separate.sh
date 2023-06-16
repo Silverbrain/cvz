@@ -9,6 +9,11 @@ OUTPUT_DIR="aux"
 ########## FLAGS ##########
 OPEN_FILES=false # Open pdf files after compilation
 RENDER_PHOTO="\let\ifrenderphoto\iffalse" # Render photo at top left corner
+
+## TESTING ##
+RENDER_LOCATION="\let\ifrenderloc\iffalse" # Render location under the Name
+#############
+
 VERBOSE=false #
 
 PRINT_LOG="> /dev/null" # Dump lualatex standard input if verbose is false
@@ -22,14 +27,18 @@ while getopts ":vOR" opt; do
         ;;
         O) # Open files
             OPEN_FILES=true
-            # shift
         ;;
         R) # Render photo
             if $VERBOSE; then
                 echo "Creating the resume with photo."
             fi
             RENDER_PHOTO="\let\ifrenderphoto\iftrue"
-            # shift
+        ;;
+        L) # Render location
+            if $VERBOSE; then
+                echo "Creating the resume with location."
+            fi
+            RENDER_LOCATION="\let\ifrenderloc\iftrue"
         ;;
         \?) # Bad argument
             echo "Invalide option -$OPTARG.\n"
@@ -37,6 +46,7 @@ while getopts ":vOR" opt; do
             echo "\t-v\n\t\tUsed to get more verbose status."
             echo "\t-O\n\t\tUsed to open pdf files after the latex compilation is done."
             echo "\t-R\n\t\tUsed to instruct the latex to render the photo at the begining of the resume."
+            echo "\t-L\n\t\tUsed to instruct the latex to render the location (address) under the full name."
             exit 1
         ;;
     esac
@@ -59,14 +69,9 @@ for TEX_FILE in "$TEX_FILE_DIR"/*.tex; do
     if [ -f "$TEX_FILE" ]; then # Check if the texfile exists
 
         # assembling lualatex command
-        command="lualatex --output-directory=$OUTPUT_DIR \"$RENDER_PHOTO\input{$TEX_FILE}\" $PRINT_LOG"
+        command="lualatex --output-directory=$OUTPUT_DIR \"$RENDER_PHOTO$RENDER_LOCATION\input{$TEX_FILE}\" $PRINT_LOG"
         eval "$command"
         
-        # if $VERBOSE; then
-        #     lualatex --output-directory="$OUTPUT_DIR" "$RENDER_PHOTO\input{$TEX_FILE}"
-        # else
-        #     lualatex --output-directory="$OUTPUT_DIR" "$RENDER_PHOTO\input{$TEX_FILE}" > /dev/null
-        # fi
 
         ##########
         # Moving pdf files from output directory to the root

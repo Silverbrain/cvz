@@ -7,8 +7,10 @@
 % Give optional argument to change alignment(C: center, L: left, R: right)
 \ifrenderphoto
   \photo[circle,edge,left]{profile}
+  \makecvheader[L]
+\else
+  \makecvheader[C]
 \fi
-\makecvheader[C]
 
 % Print the footer with 3 arguments(<left>, <center>, <right>)
 % Leave any of these blank if they are not needed

@@ -30,7 +30,10 @@
   \expandafter\let\csname ifrenderphoto\expandafter\endcsname
                   \csname ifrenderphoto\endcsname
 \fi
-
+\ifcsname ifrenderloc\endcsname\else
+  \expandafter\let\csname ifrenderloc\expandafter\endcsname
+                  \csname ifrenderloc\endcsname
+\fi
 %-------------------------------------------------------------------------------
 %	PERSONAL INFORMATION
 %	Comment any of the lines below if they are not required
@@ -39,8 +42,10 @@
 % \photo[rectangle,edge,right]{./examples/profile}
 \name{Sina}{Ataei}
 % \position{Software Architect{\enskip\cdotp\enskip}Security Expert}
-\address{Exeter, UK}
-
+% \address{Exeter, UK}
+\ifrenderloc
+  \address{Exeter, UK}
+\fi
 \mobile{+44 (0) 78736 57135}
 \email{sinaataei@outlook.com}
 %\dateofbirth{January 1st, 1970}
