@@ -6,6 +6,8 @@ TEX_FILE_DIR="sections"
 # Auxiliary directory name
 OUTPUT_DIR="aux"
 
+OUTPUT_PREFIX=""
+
 ########## FLAGS ##########
 OPEN_FILES=false # Open pdf files after compilation
 RENDER_PHOTO="\let\ifrenderphoto\iffalse" # Render photo at top left corner
@@ -19,28 +21,36 @@ VERBOSE=false #
 PRINT_LOG="> /dev/null" # Dump lualatex standard input if verbose is false
 
 # Reading input options
-while getopts ":vOR" opt; do
-    case $opt in
-        v) # Verboes
+while [ $# -gt 0 ]; do
+    case $1 in
+        -v|--verbose) # Verboes
             VERBOSE=true
             PRINT_LOG=""
+            shift
         ;;
-        O) # Open files
+        -O|--open-files) # Open files
             OPEN_FILES=true
+            shift
         ;;
-        R) # Render photo
+        -R|--render-photo) # Render photo
             if $VERBOSE; then
                 echo "Creating the resume with photo."
             fi
             RENDER_PHOTO="\let\ifrenderphoto\iftrue"
+            shift
         ;;
-        L) # Render location
+        -L|--render-location) # Render location
             if $VERBOSE; then
                 echo "Creating the resume with location."
             fi
             RENDER_LOCATION="\let\ifrenderloc\iftrue"
+            shift
         ;;
-        \?) # Bad argument
+        -o|--output-prefix)
+            OUTPUT_PREFIX=$2
+            shift 2
+        ;;
+        *) # Bad argument
             echo "Invalide option -$OPTARG.\n"
             echo "Usage: $0 [-v] [-O] [-R]\n"
             echo "\t-v\n\t\tUsed to get more verbose status."
@@ -71,23 +81,38 @@ for TEX_FILE in "$TEX_FILE_DIR"/*.tex; do
         # assembling lualatex command
         command="lualatex --output-directory=$OUTPUT_DIR \"$RENDER_PHOTO$RENDER_LOCATION\input{$TEX_FILE}\" $PRINT_LOG"
         eval "$command"
-        
-
-        ##########
-        # Moving pdf files from output directory to the root
-        # directory for easier access
-        ##########
-        mv "$OUTPUT_DIR"/*.pdf .
     else
         echo "No tex file was found in $TEX_FILE_DIR directory."
         return 0
     fi
 done
+
 ##########
-# Opening all pdf files in the root directory if -O flag is set
+# Moving pdf files from output directory to the root
+# directory for easier access
 ##########
-if $OPEN_FILES; then
-    for PDF_FILE in *.pdf; do
-        open $PDF_FILE
-    done
-fi
+for PDF_FILE in "$OUTPUT_DIR"/*.pdf; do
+    if [ -f "$PDF_FILE" ]; then
+        
+        # Adding prefix to the name of pdf files in case it's specified
+        if [[ -n "$OUTPUT_PREFIX" ]]; then
+            # Extract the filename and extension
+            filename=$(basename -- "$PDF_FILE")
+            extension="${filename##*.}"
+            filename="${filename%.*}"
+            
+            # Create the new filename with the prefix
+            new_filename="${OUTPUT_PREFIX}_${filename}.${extension}"
+
+            mv "$PDF_FILE" ./"$new_filename"
+            
+            PDF_FILE=./"$new_filename"
+        fi
+
+        # Opening all pdf files in the root directory if -O flag is set
+        if $OPEN_FILES; then
+            open $PDF_FILE
+        fi
+    fi
+    
+done
