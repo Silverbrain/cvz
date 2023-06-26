@@ -1,5 +1,5 @@
 #!/bin/zsh
 
 echo "Updating the resume..."
-./render_separate.sh -O --output-prefix "Sina_Ataei"
+./render_separate.sh -L --output-prefix "Sina_Ataei"
 echo "Done!"
