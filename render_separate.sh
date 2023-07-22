@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+updated_file=$(basename $1)
+shift
+OPEN_WITH="/Applications/Visual Studio Code.app"
+
 # Directory of .tex files mentioned in the main.tex
 TEX_FILE_DIR="sections"
 
@@ -62,6 +66,10 @@ while [ $# -gt 0 ]; do
     esac
 done
 
+current_time=$(date +%H:%M:%S)
+
+echo -n -e "\e[36m$current_time\e[0m    $updated_file \e[33mUPDATED\e[0m    Rendering in progress"
+
 # Checking if output directory exists
 if [ -d "$OUTPUT_DIR" ]; then
     if $VERBOSE; then
@@ -80,7 +88,12 @@ for TEX_FILE in "$TEX_FILE_DIR"/*.tex; do
 
         # assembling lualatex command
         command="lualatex --output-directory=$OUTPUT_DIR \"$RENDER_PHOTO$RENDER_LOCATION\input{$TEX_FILE}\" $PRINT_LOG"
-        eval "$command"
+        output=$(eval "$command")
+        if [[ -n "$output" ]]; then
+            echo -e "\e[97;41mERROR\e[0m"
+            echo "$output"
+            exit 1
+        fi
     else
         echo "No tex file was found in $TEX_FILE_DIR directory."
         return 0
@@ -111,8 +124,11 @@ for PDF_FILE in "$OUTPUT_DIR"/*.pdf; do
 
         # Opening all pdf files in the root directory if -O flag is set
         if $OPEN_FILES; then
-            open $PDF_FILE
+            sleep 1
+            open -a "$OPEN_WITH" $new_filename
         fi
     fi
     
 done
+
+echo " ==> \e[42mSUCCESS\e[0m"
