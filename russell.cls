@@ -82,7 +82,7 @@
 %-------------------------------------------------------------------------------
 %% Page Layout
 % Configure page margins with geometry
-\geometry{left=2.0cm, top=1.5cm, right=2.0cm, bottom=2.0cm, footskip=.5cm}
+\geometry{left=2.5cm, top=2.5cm, right=2.5cm, bottom=2.0cm, footskip=.8cm}
 
 %% Header & Footer
 % Set offset to each header and footer
@@ -112,7 +112,8 @@
 \definecolor{blue}{HTML}{6CE0F1}
 % Text colors
 \definecolor{darktext}{HTML}{414141}
-\colorlet{text}{darkgray}
+\definecolor{text}{HTML}{414141}
+%\colorlet{text}{darkgray}
 \colorlet{graytext}{gray}
 \colorlet{lighttext}{lightgray}
 \colorlet{sectiondivider}{gray}
@@ -157,47 +158,47 @@
 % For fundamental structures
 \newcommand*{\headerfirstnamestyle}[1]{{\fontsize{20pt}{1em}\headerfont\color{text} #1}}
 \newcommand*{\headerlastnamestyle}[1]{{\fontsize{20pt}{1em}\headerfont\color{text} #1}}
-\newcommand*{\headerpositionstyle}[1]{{\fontsize{7.6pt}{1em}\bodyfont\scshape\color{russell} #1}}
-\newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1em}\headerfont\itshape\color{text} #1}}
-\newcommand*{\headersocialstyle}[1]{{\fontsize{6.8pt}{1em}\headerfont\color{text} #1}}
+\newcommand*{\headerpositionstyle}[1]{{\fontsize{8pt}{1em}\bodyfont\scshape\color{russell} #1}}
+\newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1em}\headerfont\itshape\color{darktext} #1}}
+\newcommand*{\headersocialstyle}[1]{{\fontsize{8pt}{1em}\headerfont\color{text} #1}}
 \newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
 \newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
-\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\bfseries\color{russell}\@sectioncolor #1}}
+\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
 \newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
-\newcommand*{\paragraphstyle}{\fontsize{10pt}{1em}\bodyfontlight\upshape\color{text}}
+\newcommand*{\paragraphstyle}{\fontsize{10pt}{1em}\bodyfont\upshape\color{graytext}}
 
 % For elements of entry
-\newcommand*{\entrytitlestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\entrytitlestyle}[1]{{\fontsize{12pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\entrypositionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{graytext} #1}}
 \newcommand*{\entrydatestyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\entrylocationstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\slshape\color{russell} #1}}
-\newcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{russell} #1}}
+\newcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\upshape\color{graytext} #1}}
 
 % For elements of subentry
-\newcommand*{\subentrytitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\mdseries\color{graytext} #1}}
-\newcommand*{\subentrypositionstyle}[1]{{\fontsize{7pt}{1em}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\subentrydatestyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\subentrylocationstyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{russell} #1}}
-\newcommand*{\subdescriptionstyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\subentrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\mdseries\color{graytext} #1}}
+\newcommand*{\subentrypositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\subentrydatestyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
+\newcommand*{\subentrylocationstyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\slshape\color{russell} #1}}
+\newcommand*{\subdescriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\upshape\color{text} #1}}
 
 % For elements of honor
-\newcommand*{\honortitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{graytext} #1}}
-\newcommand*{\honorpositionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\honordatestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{graytext} #1}}
-\newcommand*{\honorlocationstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\slshape\color{russell} #1}}
+\newcommand*{\honortitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
+\newcommand*{\honorpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
+\newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{russell} #1}}
 
 % For elements of skill
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\skillsetstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\color{text} #1}}
+\newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
 
 % For elements of the cover letter
 \newcommand*{\lettersectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
-\newcommand*{\recipientaddressstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\recipienttitlestyle}[1]{{\fontsize{13pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\lettertitlestyle}[1]{{\fontsize{12pt}{1em}\bodyfontlight\bfseries\color{darktext} \underline{#1}}}
-\newcommand*{\letterdatestyle}[1]{{\fontsize{12pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\lettertextstyle}{\fontsize{12pt}{1.4em}\bodyfont\upshape\color{darktext}}
-\newcommand*{\letternamestyle}[1]{{\fontsize{12pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\recipientaddressstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\recipienttitlestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\lettertitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\bfseries\color{darktext} \underline{#1}}}
+\newcommand*{\letterdatestyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
+\newcommand*{\lettertextstyle}{\fontsize{10pt}{1.4em}\bodyfontlight\upshape\color{graytext}}
+\newcommand*{\letternamestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\letterenclosurestyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\slshape\color{lighttext} #1}}
 
 
@@ -429,11 +430,11 @@
   \newlength{\headertextwidth}
   \newlength{\headerphotowidth}
   \ifthenelse{\isundefined{\@photo}}{
-    \setlength{\headertextwidth}{0.7\textwidth}
-    \setlength{\headerphotowidth}{0.3\textwidth}
+    \setlength{\headertextwidth}{0.8\textwidth}
+    \setlength{\headerphotowidth}{0.2\textwidth}
   }{%
-    \setlength{\headertextwidth}{0.76\textwidth}
-    \setlength{\headerphotowidth}{0.24\textwidth}
+    \setlength{\headertextwidth}{0.80\textwidth}
+    \setlength{\headerphotowidth}{0.20\textwidth}
   }%
   \begin{minipage}[c]{\headerphotowidth}%
     \ifthenelse{\equal{\@photoalign}{left}}{\raggedright\drawphoto}{}
@@ -616,7 +617,7 @@
   \paragraphstyle
 }{%
   \par
-  \vspace{2mm}
+  \vspace{-2mm}
 }
 
 % Define an environment for cventry
@@ -624,7 +625,8 @@
   \vspace{\acvSectionContentTopSkip}
   \begin{center}
 }{%
-  \end{center}
+  \end{center}%
+  \vspace{-5.0mm}%
 }
 % Define an entry of cv information
 % Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
@@ -639,6 +641,7 @@
       \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
     \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
   \end{tabular*}%
+  \vspace{1.0mm}%
 }
 
 % Define an environment for cvsubentry
